@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>test3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- You can add your styles and scripts here -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="style/Stage1.css"
+    />
+    <script type="module" src="src/main.js"></script>
+  </head>
+
+  <body>
+    <div class="inv">
+      <div class="header">
+        <p class="title">Inventory</p>
+      </div>
+      <br />
+      <div>
+        <div class="listSelect" id="category"></div>
+      </div>
+      <br />
+      <div class="itemInputField">
+        <input type="text" name="newItem" id="newItem"/>
+        <input type="button" value="Submit" id="submitNewItem"/>
+      </div>
+      <br />
+      <div style="margin: 10px">
+        <p id="listlength" style="margin: auto; width: 80%"></p>
+        <ul id="listSection" class="itemlist"></ul>
+      </div>
+    </div>
+  </body>
+</html>
