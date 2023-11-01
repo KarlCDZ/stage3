@@ -63,11 +63,16 @@ ul.itemlist li {
   justify-content: space-between;
 }
 
+ul.itemlist li.hidden {
+  display: none;
+}
+
 ul.itemlist li input {
   height: 25px;
   width: 25px;
   background-color: white;
 }
+
 ul.itemlist li.active {
   margin: auto;
   width: 80%;
@@ -76,4 +81,33 @@ ul.itemlist li.active {
   border: 1px;
   border-style: solid;
   background-color: lightgreen;
+}
+
+nav.paginationContainer {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  justify-content: space-evenly;
+}
+
+div button.paginationNumber,
+nav.paginationContainer button.paginationButton {
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  margin: 0.25rem 0.25rem;
+  cursor: pointer;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 0.2rem;
+}
+
+div button.paginationNumber:hover,
+nav.paginationContainer button.paginationButton:not(.disabled):hover {
+  background: lightblue;
+}
+
+div button.paginationNumber.active {
+  color: white;
+  background: blue;
 }
