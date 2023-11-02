@@ -21,7 +21,7 @@ const lists = [
 
 const category = document.getElementById('category');
 
-const listSect = document.getElementById('listSection');
+const listSection = document.getElementById('listSection');
 const listNum = document.getElementById('listlength');
 const submitNewItem = document.getElementById('submitNewItem');
 const paginationNumbers = document.getElementById('paginationNumbers');
@@ -53,10 +53,11 @@ function setCurrPage (pageNumber) {
     const prevRange = (pageNumber - 1) * itemPerPage;
     const currRange = pageNumber * itemPerPage;
     // hide elements not in this page and show elements of this page
-    for (let index = 0; index < listSect.children.length; index++) {
-        listSect.children[index].classList.add('hidden');
+    // maybe I can also remove the elements and append child nodes in the range
+    for (let index = 0; index < listSection.children.length; index++) {
+        listSection.children[index].classList.add('hidden');
         if (index >= prevRange && index < currRange) {
-            listSect.children[index].classList.remove('hidden');
+            listSection.children[index].classList.remove('hidden');
         }
     }
 
@@ -79,7 +80,6 @@ function setCurrPage (pageNumber) {
     } else {
         enableButton(nextButton);
     }
-
 
     updateListText();
 }
@@ -147,25 +147,25 @@ function listAdditem (itemString) {
     removeButton.type = "image";
     removeButton.setAttribute('src', '../public/trash.png');
     li.appendChild(removeButton);
-    listSect.appendChild(li);
+    listSection.appendChild(li);
 }
 
 function generateList (itemList) {
-    listSect.innerHTML = '';
+    listSection.innerHTML = '';
     updateListText();
     for (let i = 0; i < itemList.length; i++) {
         listAdditem(itemList[i]);
     }
 }
 
-listSect.addEventListener("click", (e) => {
+listSection.addEventListener("click", (e) => {
     if (e.target.tagName === 'LI') {
         e.target.classList.toggle('active');
     }
     if (e.target.tagName === 'INPUT') {
         // remove the element from page and array
         let item = e.target.parentElement.childNodes[0].nodeValue;
-        console.log(item);
+        // console.log(item);
         currList.splice(currList.indexOf(item), 1);
         e.target.parentElement.remove();
 

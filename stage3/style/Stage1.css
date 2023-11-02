@@ -5,7 +5,8 @@ div.inv {
 
 div.header {
   margin: auto;
-  width: 400px;
+  width: 100%;
+  max-width: 500px;
   background: lightblue;
   height: 100px;
 }
@@ -44,6 +45,28 @@ div.listSelect button {
   padding: 10px;
   background-color: lightgray;
 }
+div.itemInputSection {
+  display: flex;
+  justify-content: center;
+}
+
+div.itemInputSection input.newItemInput {
+  font-size: larger;
+  width: 40%;
+}
+
+div.itemInputSection input.addItemButton {
+  background-color: blue;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: white;
+  font-size: larger;
+}
+
+div.itemInputField input.addItemButton:hover {
+  background-color: lightblue;
+  color: black;
+}
 
 ul.itemlist {
   background-color: ghostwhite;
@@ -58,7 +81,7 @@ ul.itemlist li {
   list-style: none;
   border: 1px;
   border-style: solid;
-  background-color: lightgray;
+  background-color: lightgrey;
   align-content: center;
   justify-content: space-between;
 }
@@ -71,6 +94,10 @@ ul.itemlist li input {
   height: 25px;
   width: 25px;
   background-color: white;
+}
+
+ul.itemlist li input:hover {
+  background-color: lightgrey;
 }
 
 ul.itemlist li.active {
@@ -86,8 +113,7 @@ ul.itemlist li.active {
 nav.paginationContainer {
   display: flex;
   align-items: center;
-  position: absolute;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 div button.paginationNumber,
