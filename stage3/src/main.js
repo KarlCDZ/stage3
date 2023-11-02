@@ -31,6 +31,10 @@ const itemPerPage = 5;
 var currList;
 var currPage;
 
+function getPageCount () {
+    return Math.ceil(currList.length / itemPerPage);
+}
+
 function addPageNumberButtons (index) {
     const pageNumber = document.createElement('button');
     pageNumber.className = 'paginationNumber';
@@ -41,9 +45,8 @@ function addPageNumberButtons (index) {
 }
 
 function generatePageNumbers () {
-    let pageCount = Math.ceil(currList.length / itemPerPage);
     paginationNumbers.innerHTML = '';
-    for (let i = 1; i <= pageCount; i++) {
+    for (let i = 1; i <= getPageCount(); i++) {
         addPageNumberButtons(i);
     }
 }
@@ -68,7 +71,21 @@ function setCurrPage (pageNumber) {
             paginationNumbers.children[index].classList.add('active');
         }
     }
+    updatePrevNextButton();
+    updateListText();
+}
 
+function disableButton (button) {
+    button.classList.add('disabled');
+    button.setAttribute('disabled', true);
+}
+
+function enableButton (button) {
+    button.classList.remove('disabled');
+    button.removeAttribute('disabled');
+}
+
+function updatePrevNextButton () {
     // update the previous and next button status (enable/disable)
     // 0 is no element in the list, edge case
     if (currPage === 1 || currPage === 0) {
@@ -81,8 +98,6 @@ function setCurrPage (pageNumber) {
     } else {
         enableButton(nextButton);
     }
-
-    updateListText();
 }
 
 paginationNumbers.addEventListener('click', (e) => {
@@ -102,16 +117,6 @@ prevButton.onclick = function () {
 nextButton.onclick = function () {
     setCurrPage(currPage + 1);
 };
-
-function disableButton (button) {
-    button.classList.add('disabled');
-    button.setAttribute('disabled', true);
-}
-
-function enableButton (button) {
-    button.classList.remove('disabled');
-    button.removeAttribute('disabled');
-}
 
 function addCategoryButton (lists) {
     for (let i = 0; i < lists.length; i++) {
@@ -138,7 +143,7 @@ function chooseCategory (clicked, itemList) {
 }
 
 function updateListText () {
-    listDescription.innerText = `List - Page ${currPage}/${Math.ceil(currList.length / itemPerPage)} (Total - ${currList.length})`;
+    listDescription.innerText = `List - Page ${currPage}/${getPageCount()} (Total - ${currList.length})`;
 }
 
 function listAdditem (itemString) {
@@ -171,7 +176,7 @@ listSection.addEventListener("click", (e) => {
 
         // regenerate the pages, if the delete element is the last one in this page then go to previous page
         generatePageNumbers();
-        if (Math.ceil(currList.length / itemPerPage) < currPage) {
+        if (getPageCount() < currPage) {
             setCurrPage(currPage - 1);
         }
         else {
