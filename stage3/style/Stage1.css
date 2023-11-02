@@ -63,9 +63,13 @@ div.itemInputSection input.addItemButton {
   font-size: larger;
 }
 
-div.itemInputField input.addItemButton:hover {
+div.itemInputSection input.addItemButton:hover {
   background-color: lightblue;
   color: black;
+}
+p#listDescription {
+  margin: auto;
+  width: 80%;
 }
 
 ul.itemlist {

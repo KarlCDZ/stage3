@@ -22,7 +22,7 @@ const lists = [
 const category = document.getElementById('category');
 
 const listSection = document.getElementById('listSection');
-const listNum = document.getElementById('listlength');
+const listDescription = document.getElementById('listDescription');
 const submitNewItem = document.getElementById('submitNewItem');
 const paginationNumbers = document.getElementById('paginationNumbers');
 const nextButton = document.getElementById('nextButton');
@@ -70,7 +70,8 @@ function setCurrPage (pageNumber) {
     }
 
     // update the previous and next button status (enable/disable)
-    if (currPage === 1) {
+    // 0 is no element in the list, edge case
+    if (currPage === 1 || currPage === 0) {
         disableButton(prevButton);
     } else {
         enableButton(prevButton);
@@ -137,7 +138,7 @@ function chooseCategory (clicked, itemList) {
 }
 
 function updateListText () {
-    listNum.innerText = `List - Page ${currPage}/${Math.ceil(currList.length / itemPerPage)} (Total - ${currList.length})`;
+    listDescription.innerText = `List - Page ${currPage}/${Math.ceil(currList.length / itemPerPage)} (Total - ${currList.length})`;
 }
 
 function listAdditem (itemString) {
@@ -165,11 +166,10 @@ listSection.addEventListener("click", (e) => {
     if (e.target.tagName === 'INPUT') {
         // remove the element from page and array
         let item = e.target.parentElement.childNodes[0].nodeValue;
-        // console.log(item);
         currList.splice(currList.indexOf(item), 1);
         e.target.parentElement.remove();
 
-        // regenerate the pages
+        // regenerate the pages, if the delete element is the last one in this page then go to previous page
         generatePageNumbers();
         if (Math.ceil(currList.length / itemPerPage) < currPage) {
             setCurrPage(currPage - 1);
@@ -189,6 +189,9 @@ submitNewItem.onclick = function () {
 
     // regenerate the pages
     generatePageNumbers();
+    if (currPage === 0) {
+        currPage++;
+    }
     setCurrPage(currPage);
 }
 
